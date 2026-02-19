@@ -1,0 +1,39 @@
+# Netlify CMS configuration (GitHub backend)
+# SETUP REQUIRED: Follow DEPLOYMENT.md before using this config
+# 1. Create GitHub OAuth app at: https://github.com/settings/developers
+# 2. Replace GITHUB_USER/REPO with your repo (e.g., praise/blissland-site)
+# 3. Replace YOUR_GITHUB_OAUTH_CLIENT_ID with Client ID from OAuth app
+# 4. Ensure https://api.netlify.com/auth/done is set as OAuth callback URL
+
+backend:
+  name: github
+  repo: GITHUB_USER/REPO # e.g. praise/blissland-site
+  branch: main
+  auth_type: implicit
+  app_id: "YOUR_GITHUB_OAUTH_CLIENT_ID"
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "news"
+    label: "News"
+    folder: "content/news"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Cover Image", name: "cover", widget: "image" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "gallery"
+    label: "Gallery"
+    folder: "content/gallery"
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Caption", name: "caption", widget: "string", required: false }
+
